@@ -1,0 +1,25 @@
+{
+  "name": "web-workflow",
+  "version": "1.0.0",
+  "description": "Web workflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusWisniewski/web-workflow.git"
+  },
+  "keywords": [
+    "SASS",
+    "NPM",
+    "Git",
+    "Gulp"
+  ],
+  "author": "Matheus Wisniewski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusWisniewski/web-workflow/issues"
+  },
+  "homepage": "https://github.com/MatheusWisniewski/web-workflow#readme"
+}
