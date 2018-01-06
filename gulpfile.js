@@ -5,6 +5,7 @@ var reload = browserSync.reload;
 var autoprefixer = require("gulp-autoprefixer");
 var clean = require("gulp-clean");
 var concat = require("gulp-concat");
+var browserify = require("gulp-browserify");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
@@ -49,6 +50,7 @@ gulp.task('sass', function() {
 gulp.task('scripts', ['clean-scripts'],  function() {
     return gulp.src(SOURCE_PATHS.jsSource)
         .pipe(concat('main.js'))
+        .pipe(browserify())
         .pipe(gulp.dest(APP_PATHS.js))
 })
 

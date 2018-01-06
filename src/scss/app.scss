@@ -1,13 +1,9 @@
 $black: #000000;
 
 body {
-    background-color: gray;
+    background-color: pink;
 }
 
 h1 {
-    color: white;
-}
-
-h1:hover {
-    transition: color 1s ease;
+    color: $black;
 }
