@@ -3,6 +3,7 @@ var sass = require("gulp-sass");
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var autoprefixer = require("gulp-autoprefixer");
+var clean = require("gulp-clean");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
@@ -14,6 +15,17 @@ var APP_PATHS = {
     js: 'app/js'
 }
 
+gulp.task('clean-html', function() {
+    return gulp.src(
+            APP_PATHS.root + '*.html', 
+            {
+                read: false,
+                force: true
+            }
+        )
+        .pipe(clean());
+})
+
 gulp.task('sass', function() {
     return gulp.src(SOURCE_PATHS.sassSource)
         .pipe(autoprefixer())
@@ -21,7 +33,7 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(APP_PATHS.css))
 });
 
-gulp.task('copy', function() {
+gulp.task('copy', ['clean-html'], function() {
     gulp.src(SOURCE_PATHS.htmlSource)
         .pipe(gulp.dest(APP_PATHS.root))
 })
