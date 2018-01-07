@@ -6,6 +6,7 @@ var autoprefixer = require("gulp-autoprefixer");
 var clean = require("gulp-clean");
 var concat = require("gulp-concat");
 var browserify = require("gulp-browserify");
+var merge = require("merge-stream");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
@@ -41,10 +42,17 @@ gulp.task('clean-scripts', function() {
 })
 
 gulp.task('sass', function() {
-    return gulp.src(SOURCE_PATHS.sassSource)
+
+    var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+    var sassFiles;
+
+    sassFiles = gulp.src(SOURCE_PATHS.sassSource)
         .pipe(autoprefixer())
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-        .pipe(gulp.dest(APP_PATHS.css))
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError));
+
+    return merge(bootstrapCSS, sassFiles)
+        .pipe(concat('app.css'))
+        .pipe(gulp.dest(APP_PATHS.css));
 });
 
 gulp.task('scripts', ['clean-scripts'],  function() {

@@ -3,5 +3,5 @@ bootstrap = require('bootstrap');
 mustache = require('mustache');
 
 jQuery(document).ready(function() {
-    alert("Hello")
+    alert("Paulo")
 })
