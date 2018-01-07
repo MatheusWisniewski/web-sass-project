@@ -1,10 +1,11 @@
 $black: #000000;
 
 body {
-    background-color: pink;
+    background-color: lightgrey;
 }
 
 h1 {
     color: $black;
     font-size: 50px;
+    text-align: center;
 }

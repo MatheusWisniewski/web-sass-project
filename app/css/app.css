@@ -6757,10 +6757,11 @@ button.close {
 /*# sourceMappingURL=bootstrap.css.map */
 
 body {
-  background-color: pink;
+  background-color: lightgrey;
 }
 
 h1 {
   color: #000000;
   font-size: 50px;
+  text-align: center;
 }

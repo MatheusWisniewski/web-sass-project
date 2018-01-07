@@ -68,7 +68,7 @@ gulp.task('scripts', ['clean-scripts'],  function() {
         .pipe(gulp.dest(APP_PATHS.js))
 })
 
-gulp.task('copy', ['clean-html', 'clean-scripts'], function() {
+gulp.task('copy', ['clean-html'], function() {
     gulp.src(SOURCE_PATHS.htmlSource)
         .pipe(gulp.dest(APP_PATHS.root))
 })
