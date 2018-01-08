@@ -9,9 +9,11 @@ var browserify = require("gulp-browserify");
 var merge = require("merge-stream");
 var newer = require("gulp-newer");
 var imagemin = require("gulp-imagemin");
+var injectPartials = require("gulp-inject-partials");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
+    htmlPartialSource: 'src/partial/*.html',
     sassSource: 'src/scss/*.scss',
     jsSource: 'src/js/*.js',
     imgSource: 'src/img/**'
@@ -79,12 +81,18 @@ gulp.task('scripts', ['clean-scripts'],  function() {
         .pipe(gulp.dest(APP_PATHS.js))
 })
 
-gulp.task('copy', ['clean-html'], function() {
-    gulp.src(SOURCE_PATHS.htmlSource)
+gulp.task('html', ['clean-html'], function() {
+    return gulp.src(SOURCE_PATHS.htmlSource)
+        .pipe(injectPartials())
         .pipe(gulp.dest(APP_PATHS.root))
 })
 
-gulp.task('serve', ['sass', 'scripts'], function() {
+// gulp.task('copy', ['clean-html'], function() {
+//     gulp.src(SOURCE_PATHS.htmlSource)
+//         .pipe(gulp.dest(APP_PATHS.root))
+// })
+
+gulp.task('serve', ['html', 'sass', 'scripts'], function() {
     browserSync.init(
         [
             APP_PATHS.root + '/*.html', 
@@ -99,7 +107,7 @@ gulp.task('serve', ['sass', 'scripts'], function() {
     )
 })
 
-gulp.task('watch', ['serve', 'copy', 'move-fonts', 'images'], function() {
+gulp.task('watch', ['serve', 'move-fonts', 'images'], function() {
     gulp.watch(
         [
             SOURCE_PATHS.sassSource
@@ -110,10 +118,11 @@ gulp.task('watch', ['serve', 'copy', 'move-fonts', 'images'], function() {
     );
     gulp.watch(
         [
-            SOURCE_PATHS.htmlSource
+            SOURCE_PATHS.htmlSource,
+            SOURCE_PATHS.htmlPartialSource
         ],
         [
-            'copy'
+            'html'
         ]
     );
     gulp.watch(
@@ -122,6 +131,14 @@ gulp.task('watch', ['serve', 'copy', 'move-fonts', 'images'], function() {
         ],
         [
             'scripts'
+        ]
+    );
+    gulp.watch(
+        [
+            SOURCE_PATHS.imgSource
+        ],
+        [
+            'images'
         ]
     );
 })
