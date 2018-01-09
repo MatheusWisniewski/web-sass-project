@@ -10,6 +10,7 @@ var merge = require("merge-stream");
 var newer = require("gulp-newer");
 var imagemin = require("gulp-imagemin");
 var injectPartials = require("gulp-inject-partials");
+var minify = require("gulp-minify");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
@@ -78,6 +79,9 @@ gulp.task('scripts', ['clean-scripts'],  function() {
     return gulp.src(SOURCE_PATHS.jsSource)
         .pipe(concat('main.js'))
         .pipe(browserify())
+        .pipe(minify({
+            noSource: true
+        }))
         .pipe(gulp.dest(APP_PATHS.js))
 })
 
