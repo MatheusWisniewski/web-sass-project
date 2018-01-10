@@ -13,6 +13,7 @@ var injectPartials = require("gulp-inject-partials");
 var minify = require("gulp-minify");
 var rename = require("gulp-rename");
 var cssmin = require("gulp-cssmin");
+var htmlmin = require("gulp-htmlmin");
 
 var SOURCE_PATHS = {
     htmlSource: 'src/*.html',
@@ -54,9 +55,8 @@ gulp.task('clean-scripts', function() {
 gulp.task('sass', function() {
 
     var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
-    var sassFiles;
 
-    sassFiles = gulp.src(SOURCE_PATHS.sassSource)
+    var sassFiles = gulp.src(SOURCE_PATHS.sassSource)
         .pipe(autoprefixer())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError));
 
@@ -87,6 +87,13 @@ gulp.task('scripts', ['clean-scripts'],  function() {
 })
 
 /* PROD ONLY */
+
+gulp.task('compress-html', function() {
+    return gulp.src(SOURCE_PATHS.htmlSource)
+        .pipe(injectPartials())
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(APP_PATHS.root))
+})
 
 gulp.task('compress-css', function() {
 
@@ -132,7 +139,8 @@ gulp.task('serve', ['html', 'sass', 'scripts'], function() {
         {
             server: {
                 baseDir: APP_PATHS.root
-            }
+            },
+            open: false
         }
     )
 })
