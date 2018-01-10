@@ -182,3 +182,5 @@ gulp.task('watch', ['serve', 'move-fonts', 'images'], function() {
 })
 
 gulp.task('default', ['watch']);
+
+gulp.task('production', ['compress-html', 'compress-css', 'compress-js']);
