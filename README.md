@@ -1,5 +1,5 @@
-# web-workflow
-Web workflow with NPM, Gulp, SASS &amp; more
+# web-sass-project
+Simple project with NPM, Gulp, SASS &amp; more
 
 # Install Instructions
 
