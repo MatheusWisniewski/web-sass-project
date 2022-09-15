@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/MatheusWisniewski/web-workflow#readme",
   "devDependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "browser-sync": "^2.23.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
